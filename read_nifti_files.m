@@ -1,7 +1,7 @@
 function [ph, mag, TE, vox, matrix_size,imsize, NumEcho] = read_nifti_files(path,  subject, session, anat_or_fmap, file_ending, options)
-addpath(genpath('/NAS/home/jhuck/Documents/QSM_toolboxes/Hongfu_Sun/QSM'))
-addpath(genpath('/NAS/home/jhuck/Documents/2021_preventAD/scripts'))
-addpath(genpath('/NAS/home/jhuck/Documents/QSM_toolboxes/nifti_utils/'))
+addpath(genpath('~/Documents/QSM_toolboxes/Hongfu_Sun/QSM'))
+addpath(genpath('~/Documents/QSM_coil_combination_with_low_res_fieldmaps'))
+addpath(genpath('~/Documents/nifti_utils/'))
 
 
 if options.QSM_folder == 1
@@ -100,7 +100,7 @@ end
                         mag_tmp = nifti_utils.load_untouch_nii_vol_RAS([magnitude_nifti_path mag_name],'double');
                         
                         for slice = 1:matrix_size(3)
-                            ph(:,:,slice,echo,channel) = 2*pi.*((phase_tmp(:,:,slice)-min_value)/(max_value-min_value))-pi;
+                            ph(:,:,slice,channel) = 2*pi.*((phase_tmp(:,:,slice)-min_value)/(max_value-min_value))-pi;
                             mag(:,:,slice,channel) = single(mag_tmp(:,:,slice));
                         end
                     end
